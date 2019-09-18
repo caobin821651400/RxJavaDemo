@@ -1,5 +1,6 @@
 package com.joker.app.rxjavademo;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -61,6 +62,7 @@ public class SimpleUseActivity extends AppCompatActivity {
 
 
     /*******==========================================================================**********/
+    @SuppressLint("CheckResult")
     public void demo() {
         //---->步骤1. 创建被观察者Observable
         //****方式1.
@@ -132,7 +134,7 @@ public class SimpleUseActivity extends AppCompatActivity {
         Observable.just(1, 2, 3).subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
-
+                XLogUtils.d(integer + "");
             }
         });
     }
