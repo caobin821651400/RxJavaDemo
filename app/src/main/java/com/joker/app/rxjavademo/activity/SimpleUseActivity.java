@@ -1,4 +1,4 @@
-package com.joker.app.rxjavademo;
+package com.joker.app.rxjavademo.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.joker.app.rxjavademo.R;
 import com.joker.app.rxjavademo.utils.XLogUtils;
 
 import io.reactivex.Observable;
@@ -14,14 +15,13 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 /**
  * ====================================================
  *
  * @User :caobin
  * @Date :2019/9/17 22:47
- * @Desc :RxJava简介
+ * @Desc :RxJava基本使用
  * ====================================================
  */
 public class SimpleUseActivity extends AppCompatActivity {
@@ -29,7 +29,7 @@ public class SimpleUseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_simple_use);
     }
 
     public void presss(View view) {
@@ -128,13 +128,29 @@ public class SimpleUseActivity extends AppCompatActivity {
 
 
         //---->步骤3. 通过订阅连接观察者和被观察者
-        // observable2.subscribe(observer);
+        observable2.subscribe(observer);
+
 
         //$$$$$$$$$$$优雅链式调用
-        Observable.just(1, 2, 3).subscribe(new Consumer<Integer>() {
+        Observable.just(11, 22, 33).subscribe(new Observer<Integer>() {
             @Override
-            public void accept(Integer integer) throws Exception {
-                XLogUtils.d(integer + "");
+            public void onSubscribe(Disposable d) {
+                XLogUtils.d("开始采用subscribe连接");
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                XLogUtils.d("我收到事件--> " + integer.toString());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                XLogUtils.d("收到Error事件-> " + e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                XLogUtils.d("收到Complete事件");
             }
         });
     }
