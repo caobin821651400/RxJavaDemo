@@ -19,6 +19,14 @@ import io.reactivex.ObservableSource;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
+/**
+ * ====================================================
+ *
+ * @User :caobin
+ * @Date :2019/9/23 9:32
+ * @Desc :变化操作符
+ * ====================================================
+ */
 public class RxChangeOperatorActivity extends AppCompatActivity {
 
     @Override
@@ -47,7 +55,8 @@ public class RxChangeOperatorActivity extends AppCompatActivity {
 
 
         //-->2. FlatMap() 将被观察者发送的事件进行 拆分&单独转换 在合并成新的事件
-        //这里说我的理解：就是两个接口，第二个接口需要用到第一个接口的返回数据，就可以用到flatMap组合操作符
+        //这里说我的理解：就是两个接口，第二个接口需要用到第一个接口的返回数据，
+        // 把第一个接口的返回数据当成第二个接口的参数；就可以用到flatMap组合操作符
         Observable.create(
                 new ObservableOnSubscribe<Integer>() {
                     @Override
@@ -112,13 +121,15 @@ public class RxChangeOperatorActivity extends AppCompatActivity {
                 .subscribe(new Consumer<List<Integer>>() {
                     @Override
                     public void accept(List<Integer> stringList) throws Exception {
-                        XLogUtils.d("缓冲区数量-> "+stringList.size());
+                        XLogUtils.d("缓冲区数量-> " + stringList.size());
                         for (Integer value : stringList) {
                             XLogUtils.d("buffer-> " + value);
                         }
                     }
                 });
         //$$$$$$$$$$$$上面例子相当于： 第一次1234 第二次2345  第三次345 第四次 45 第五次 5
+
+
         //-->5.
         //-->6.
         //-->7.

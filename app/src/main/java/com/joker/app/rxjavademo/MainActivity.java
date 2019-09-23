@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.joker.app.rxjavademo.activity.RxBaseOperatorActivity;
 import com.joker.app.rxjavademo.activity.RxChangeOperatorActivity;
+import com.joker.app.rxjavademo.activity.RxMergeActivity;
 import com.joker.app.rxjavademo.activity.SimpleUseActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,5 +44,14 @@ public class MainActivity extends AppCompatActivity {
      */
     public void changeOperator(View view) {
         startActivity(new Intent(this, RxChangeOperatorActivity.class));
+    }
+
+    /**
+     * 组合&合并操作符
+     *
+     * @param view
+     */
+    public void mergeOperator(View view) {
+        startActivity(new Intent(this, RxMergeActivity.class));
     }
 }
