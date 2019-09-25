@@ -30,4 +30,10 @@
         android:onClick="mergeOperator"
         android:text="组合操作符" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="functionOperator"
+        android:text="功能操作符" />
+
 </LinearLayout>
