@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.joker.app.rxjavademo.activity.RxBackPressureActivity;
 import com.joker.app.rxjavademo.activity.RxBaseOperatorActivity;
 import com.joker.app.rxjavademo.activity.RxChangeOperatorActivity;
 import com.joker.app.rxjavademo.activity.RxFunctionActivity;
@@ -58,5 +59,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void functionOperator(View view) {
         startActivity(new Intent(this, RxFunctionActivity.class));
+    }
+
+    /**
+     * 背压
+     *
+     * @param view
+     */
+    public void BackPressure(View view) {
+        startActivity(new Intent(this, RxBackPressureActivity.class));
     }
 }
