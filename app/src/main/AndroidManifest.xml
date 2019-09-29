@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.RxBackPressureActivity"></activity>
+        <activity android:name=".activity.RxBooleanActivity"></activity>
+        <activity android:name=".activity.RxBackPressureActivity" />
         <activity android:name=".activity.RxFunctionActivity" />
         <activity android:name=".activity.RxMergeActivity" />
         <activity android:name=".activity.RxChangeOperatorActivity" />

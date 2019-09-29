@@ -42,4 +42,10 @@
         android:onClick="BackPressure"
         android:text="背压" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="booleanOperator"
+        android:text="条件操作符" />
+
 </LinearLayout>

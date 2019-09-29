@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.joker.app.rxjavademo.activity.RxBackPressureActivity;
 import com.joker.app.rxjavademo.activity.RxBaseOperatorActivity;
+import com.joker.app.rxjavademo.activity.RxBooleanActivity;
 import com.joker.app.rxjavademo.activity.RxChangeOperatorActivity;
 import com.joker.app.rxjavademo.activity.RxFunctionActivity;
 import com.joker.app.rxjavademo.activity.RxMergeActivity;
@@ -68,5 +69,14 @@ public class MainActivity extends AppCompatActivity {
      */
     public void BackPressure(View view) {
         startActivity(new Intent(this, RxBackPressureActivity.class));
+    }
+
+    /**
+     * 条件操作符
+     *
+     * @param view
+     */
+    public void booleanOperator(View view) {
+        startActivity(new Intent(this, RxBooleanActivity.class));
     }
 }
