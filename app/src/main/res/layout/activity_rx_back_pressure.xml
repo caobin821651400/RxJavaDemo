@@ -24,4 +24,10 @@
         android:onClick="correct"
         android:text="采用背压方式" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="other"
+        android:text="其他方式" />
+
 </LinearLayout>
