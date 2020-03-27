@@ -3,18 +3,27 @@ package com.joker.app.rxjavademo.activity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.jakewharton.rxbinding3.view.RxView;
+import com.jakewharton.rxbinding3.widget.RxTextView;
 import com.joker.app.rxjavademo.R;
 import com.joker.app.rxjavademo.utils.XLogUtils;
+
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import kotlin.Unit;
 
 /**
  * ====================================================
@@ -26,10 +35,22 @@ import io.reactivex.disposables.Disposable;
  */
 public class SimpleUseActivity extends AppCompatActivity {
 
+    private EditText name;
+    private EditText pwd;
+    private Button login;
+    private Button cutdownbtn;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_use);
+        name = findViewById(R.id.name);
+        pwd = findViewById(R.id.pwd);
+        login = findViewById(R.id.login);
+        cutdownbtn = findViewById(R.id.cutdownbtn);
+
+        btnEnable();
     }
 
     public void presss(View view) {
@@ -153,5 +174,34 @@ public class SimpleUseActivity extends AppCompatActivity {
                 XLogUtils.d("收到Complete事件");
             }
         });
+    }
+
+    /**
+     * 防止多次点击
+     *
+     * @param view
+     */
+    @SuppressLint("CheckResult")
+    public void nomore(View view) {
+        RxView.clicks(findViewById(R.id.nomoreview))
+                .throttleFirst(2, TimeUnit.SECONDS)
+                .subscribe(new Consumer<Unit>() {
+                    @Override
+                    public void accept(Unit unit) throws Exception {
+                        XLogUtils.d("按钮被点击了");
+                    }
+                });
+    }
+
+    /**
+     * 例如登录按钮符合输入条件才允许点击
+     */
+    @SuppressLint("CheckResult")
+    private void btnEnable() {
+        Observable<CharSequence> nameObservable = RxTextView.textChanges(name);
+        Observable<CharSequence> pwdObservable = RxTextView.textChanges(pwd);
+        Observable.combineLatest(nameObservable, pwdObservable,
+                (name, pwd) -> name.toString().length() == 11 && pwd.toString().length() == 6
+        ).subscribe(login::setEnabled);
     }
 }
